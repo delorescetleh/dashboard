@@ -5,9 +5,7 @@
     <span>{{name}}</span>
     <el-text style="float: right; padding: 3px 0" type="text" disabled>{{status}}</el-text>
   <div>
-
   </div>
-
   </div>
     <el-row>
       <el-col :span="4"><div class="grid-content bg-purple">
@@ -49,12 +47,8 @@ export default {
       unit: '攝氏',
       level: 24,
       chartData: {
-        columns: ['time', 'temperature'],
-        rows: [{ time: 1, temperature: 20 },
-          { time: 2, temperature: 21 },
-          { time: 3, temperature: 22 },
-          { time: 4, temperature: 20 },
-          { time: 5, temperature: 23 }],
+        columns: ['received_at', 'batteryLevel', 'temperatureLevel', 'humidityLevel'],
+        rows: [{ received_at: 1, batteryLevel: 20 }],
       },
     };
   },
@@ -83,22 +77,21 @@ export default {
       return formattedTime;
     },
     getData() {
-      const filename = 'data';
-      fetch(`${filename}.json`)
-        .then((r) => r.json())
-        .then((json) => {
-          const data = json;
-          data.A.forEach((element) => {
-            console.log(element.t, element.pL);
-            // const temp = { 日期: this.timeStampconver(element.t), 電壓: element.b };
-            // this.chartData.rows.push(temp);
+      const api = 'http://192.168.43.82:8082';
+      this.axios.get(api).then((response) => {
+        const theDataIgot = response.data.humidity1;
+        const mytemp = [];
+        theDataIgot.forEach((element) => {
+          mytemp.push({
+            received_at: this.timeStampconver(element.received_at),
+            batteryLevel: element.batteryLevel * 100,
+            humidityLevel: element.humidityLevel,
+            temperatureLevel: element.temperatureLevel,
           });
-        },
-        (response) => {
-          console.log('Error loading json:', response);
         });
-
-      console.log(this.chartData);
+        this.chartData.rows = mytemp;
+        console.log(this.chartData.rows);
+      });
     },
   },
   beforeMount() {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <temperature></temperature>
+    <humidity1></humidity1>
   </div>
 </template>
 <style scoped>
@@ -29,7 +29,7 @@
 </style>
 <script>
 // @ is an alias to /src
-import temperature from '../components/temperature.vue';
+import humidity1 from '../components/humidity1.vue';
 
 export default {
   name: 'Home',
@@ -40,11 +40,12 @@ export default {
   methods: {
   },
   components: {
-    temperature,
+    humidity1,
   },
   beforeMount() {
     this.$store.dispatch('getDataFromJson');
-  }
-  ,
+    // const client = this.$mqtt.connect('ws//****:8083');
+    // console.log(client);
+  },
 };
 </script>
