@@ -44,8 +44,8 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('getDataFromJson');
-    // const client = this.$mqtt.connect('ws//****:8083');
-    // console.log(client);
+    const client = this.$mqtt.connect('ws//192.168.43.82:8083');
+    console.log(client);
   },
 };
 </script>
