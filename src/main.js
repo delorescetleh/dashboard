@@ -1,7 +1,7 @@
 import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import mqtt from 'mqtt';
+// import mqtt from 'mqtt';
 import VCharts from 'v-charts';
 import VeLine from 'v-charts/lib/line.common';
 import Vue from 'vue';
@@ -10,7 +10,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-Vue.use(mqtt);
+// Vue.use(mqtt);
 Vue.use(ElementUI);
 Vue.use(VueAxios, axios);
 Vue.use(VCharts);
